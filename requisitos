@@ -1,0 +1,14 @@
+### ROTAS
+
+-------------------------------------------------
+www.encurtador.com/{GfA3s}
+	
+GET URL:
+	- shortUrl: GfA3s
+
+resposta -> www.example.com (url original)
+redirect www.example.com
+-------------------------------------------------
+	
+
+
