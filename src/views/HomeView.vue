@@ -26,14 +26,18 @@ export default {
     }
   },  
   methods: {
-    submitForm(){
+
+     submitForm(){
         try{
           event.preventDefault()
           let url = this.inputURL.trim(" ")
           if(url != ''){
               const isCorrect = new URL(url);
-              console.log(isCorrect)
-              this.novaURL = isCorrect.pathname
+              console.log(isCorrect.href)
+              const urlObj = {url: isCorrect.href}
+              
+              this.criarUrl(urlObj)              
+
           }else{
             alert('insira uma url')
           }
@@ -41,6 +45,24 @@ export default {
           alert("URL inválida")
         }
     },
+
+    async criarUrl(Objurl){
+      try{
+        const response = await fetch('http://localhost:8080/api/shorten', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },  
+          body: JSON.stringify(Objurl)  
+        });
+
+        const data = await response.json()
+        console.log(data)
+        this.novaURL = `http://localhost:8081/${data.shortenedUrl}`
+
+      }catch (err){
+          alert("URL inválida")
+      }
+    },
+
     copyURL(){
       navigator.clipboard.writeText(this.novaURL);
       alert("url copiada")

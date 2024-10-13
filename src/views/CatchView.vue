@@ -14,7 +14,7 @@
                 const response = await fetch(`http://localhost:8080/api/url${url.pathname}`)
 
                 const data = await response.json();
-                window.location.replace(`https://${data.url}`)    
+                window.location.replace(data.url)    
             }catch(error){
                 console.error('Ocorreu um erro')
             }
